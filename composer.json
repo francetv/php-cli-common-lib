@@ -1,0 +1,33 @@
+{
+    "name": "ftven/php-cli-common-lib",
+    "require": {
+        "php": ">= 5.4.19",
+        "symfony/filesystem": "*",
+        "symfony/console": "*",
+        "symfony/finder": "*",
+        "symfony/yaml": "*",
+        "guzzlehttp/guzzle": "*",
+        "twig/twig" : "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "herrera-io/phar-update": "*",
+        "kherge/box": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Olivier Hoareau",
+            "email": "olivier@phppro.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
