@@ -37,9 +37,15 @@ trait InputAwareTrait
     }
     /**
      * @return InputInterface
+     *
+     * @throws \RuntimeException
      */
     public function getInput()
     {
+        if (null === $this->input) {
+            throw new \RuntimeException('Input not set', 500);
+        }
+
         return $this->input;
     }
     /**

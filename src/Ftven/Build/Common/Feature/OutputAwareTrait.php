@@ -37,9 +37,15 @@ trait OutputAwareTrait
     }
     /**
      * @return OutputInterface
+     *
+     * @throws \RuntimeException
      */
     public function getOutput()
     {
+        if (null === $this->output) {
+            throw new \RuntimeException('Output not set', 500);
+        }
+
         return $this->output;
     }
     /**
