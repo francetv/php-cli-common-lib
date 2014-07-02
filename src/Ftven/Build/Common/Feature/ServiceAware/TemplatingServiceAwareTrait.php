@@ -46,4 +46,14 @@ trait TemplatingServiceAwareTrait
 
         return $this->templatingService;
     }
+    /**
+     * @param string $name
+     * @param array  $vars
+     *
+     * @return string
+     */
+    protected function renderTemplate($name, $vars = [])
+    {
+        return $this->getTemplatingService()->render($name, $vars);
+    }
 }
