@@ -1,4 +1,4 @@
-# PHP CLI COMMON LIB
+# PHP COMMON LIB
 
 ## Usage
 
@@ -7,12 +7,12 @@ Add the dependency in your composer.json :
     ...
     "require": {
         ...
-        "ftven/php-cli-common-lib": "dev-master"
+        "ftven/common-lib": "1.*"
     }
 
 Then update your dependency :
 
-    $ ./composer.phar update ftven/php-cli-common-lib
+    $ ./composer.phar update ftven/common-lib
 
 Then you can use it directly in your scripts :
 
