@@ -31,7 +31,7 @@
     },
     "minimum-stability": "stable",
     "suggest": {
-        "ftven/php-cli-common": "Build CLI Tools"
+        "ftven/cli-common": "Build CLI Tools"
     },
     "autoload": {
         "psr-4": {
