@@ -44,4 +44,11 @@ class SystemService implements SystemServiceInterface
             $return, "Error when executing [%s]: %s", $cmd->getCommandLine(), $cmd->getErrorOutput()
         );
     }
+    /**
+     * @return string
+     */
+    public function getTempDirectory()
+    {
+        return sys_get_temp_dir();
+    }
 }
