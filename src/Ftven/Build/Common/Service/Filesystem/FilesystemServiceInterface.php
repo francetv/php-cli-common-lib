@@ -63,4 +63,11 @@ interface FilesystemServiceInterface
      * @return $this
      */
     public function deleteDirectory($path);
+    /**
+     * @param string      $dir
+     * @param null|string $prefix
+     *
+     * @return string
+     */
+    public function createRandomFile($dir, $prefix = null);
 }

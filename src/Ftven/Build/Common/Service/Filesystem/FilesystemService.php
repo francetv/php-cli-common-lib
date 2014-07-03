@@ -103,4 +103,14 @@ class FilesystemService implements FilesystemServiceInterface
 
         return $this;
     }
+    /**
+     * @param string      $dir
+     * @param null|string $prefix
+     *
+     * @return string
+     */
+    public function createRandomFile($dir, $prefix = null)
+    {
+        return tempnam($dir, $prefix);
+    }
 }

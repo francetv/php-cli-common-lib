@@ -62,4 +62,8 @@ class GitService implements GitServiceInterface
             'name'  => $this->getUserName(),
         ];
     }
+    public function cloneRepository($location, $targetDir)
+    {
+
+    }
 }

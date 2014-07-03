@@ -39,10 +39,12 @@ class BoxService implements BoxServiceInterface
             $this->getPhpunitService()->test($dir);
         }
 
-        $this->getSystemService()->execute('bin/box build', $dir);
-
         $box = $this->getJsonService()->parseFile('box.json');
         $file = $box['output'];
+
+        $this->getFilesystemService()->createDirectory(dirname($file));
+
+        $this->getSystemService()->execute('bin/box build', $dir);
 
         if (null === $copyTo) {
             return $file;

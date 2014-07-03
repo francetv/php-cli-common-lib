@@ -28,4 +28,8 @@ interface SystemServiceInterface
      * @throws RuntimeException
      */
     public function execute($command, $dir = null, $goodExitCodes = [0]);
+    /**
+     * @return string
+     */
+    public function getTempDirectory();
 }
