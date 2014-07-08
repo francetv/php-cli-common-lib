@@ -11,34 +11,11 @@
 
 namespace Ftven\Build\Common\Service\Yaml;
 
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Yaml;
-
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
 interface YamlServiceInterface
 {
-    /**
-     * @param Yaml $yaml
-     *
-     * @return $this
-     */
-    public function setYaml(Yaml $yaml);
-    /**
-     * @param Parser $yamlParser
-     *
-     * @return $this
-     */
-    public function setYamlParser(Parser $yamlParser);
-    /**
-     * @return Yaml
-     */
-    public function getYaml();
-    /**
-     * @return Parser
-     */
-    public function getYamlParser();
     /**
      * @param string $path
      *

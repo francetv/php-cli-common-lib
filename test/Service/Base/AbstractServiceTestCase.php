@@ -14,7 +14,7 @@ namespace Ftven\Build\Common\Service\Base;
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-abstract class AbstractServiceTestCase extends \PHPUnit_Framework_TestCase
+abstract class AbstractServiceTestCase extends AbstractTestCase
 {
     /**
      * @var mixed

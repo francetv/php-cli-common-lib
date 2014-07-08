@@ -12,8 +12,8 @@
 namespace Ftven\Build\Common\Service\Yaml;
 
 use Ftven\Build\Common\Feature\ServiceAware\FilesystemServiceAwareTrait;
+use Ftven\Build\Common\Feature\SymfonyYamlDumperAwareTrait;
 use Ftven\Build\Common\Feature\SymfonyYamlParserAwareTrait;
-use Ftven\Build\Common\Feature\SymfonyYamlAwareTrait;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
@@ -22,7 +22,7 @@ class YamlService implements YamlServiceInterface
 {
     use FilesystemServiceAwareTrait;
     use SymfonyYamlParserAwareTrait;
-    use SymfonyYamlAwareTrait;
+    use SymfonyYamlDumperAwareTrait;
     /**
      * @param string $path
      *
@@ -49,6 +49,6 @@ class YamlService implements YamlServiceInterface
      */
     public function dump($data, $depth = 20)
     {
-        return $this->getYaml()->dump($data, $depth);
+        return $this->getYamlDumper()->dump($data, $depth);
     }
 }

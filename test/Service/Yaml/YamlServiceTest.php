@@ -12,12 +12,14 @@
 namespace Ftven\Build\Common\Service\Yaml;
 
 use Ftven\Build\Common\Service\Base\AbstractServiceTestCase;
+use Ftven\Build\Common\Feature\YamlServiceMockerTrait;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
 class YamlServiceTest extends AbstractServiceTestCase
 {
+    use YamlServiceMockerTrait;
     /**
      * @return YamlService
      */
@@ -26,64 +28,46 @@ class YamlServiceTest extends AbstractServiceTestCase
         return parent::getService();
     }
     /**
-     * @param array $methods
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @group unit
      */
-    protected function getFilesystemMock($methods = [])
+    public function testParseFile()
     {
-        return $this->getMock(
-            'Ftven\\Build\\Common\\Service\\Filesystem\\FilesystemService',
-            $methods,
-            [],
-            '',
-            false
-        );
-    }
-    /**
-     * @param array $methods
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getYamlMock($methods = [])
-    {
-        return $this->getMock(
-            'Symfony\\Component\\Yaml\\Yaml',
-            $methods,
-            [],
-            '',
-            false
-        );
-    }
-    /**
-     * @param array $methods
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getYamlParserMock($methods = [])
-    {
-        return $this->getMock(
-            'Symfony\\Component\\Yaml\\Parser',
-            $methods,
-            [],
-            '',
-            false
+        $this->getService()->setFilesystemService($this->getFilesystemServiceMock([
+            ['method' => 'readFile', 'params' => ['myfile.yaml'], 'return' => 'a: b'],
+        ]));
+        $this->getService()->setYamlParser($this->getSymfonyYamlParserMock([
+            ['method' => 'parse', 'params' => ['a: b'], 'return' => ['a' => 'b']],
+        ]));
+
+        $this->assertEquals(
+            ['a' => 'b'],
+            $this->getService()->parseFile('myfile.yaml')
         );
     }
     /**
      * @group unit
      */
-    public function testParseFile()
+    public function testDump()
     {
-        $fsMock         = $this->getFilesystemMock(['readFile']);
-        $yamlParserMock = $this->getYamlParserMock(['parse']);
+        $this->getService()->setYamlDumper($this->getSymfonyYamlDumperMock([
+            ['method' => 'dump', 'params' => [['a' => 'b'], 20], 'return' => 'a: b'],
+        ]));
 
-        $fsMock->expects($this->once())->method('readFile')->with('myfile.yaml')->will($this->returnValue('{}'));
-        $yamlParserMock->expects($this->once())->method('parse')->with('{}')->will($this->returnValue([]));
+        $this->assertEquals('a: b', $this->getService()->dump(['a' => 'b']));
+    }
+    /**
+     * @group integ
+     */
+    public function testDumpNotMocked()
+    {
+        $this->assertEquals(
+            "a: b\n",
+            $this->getYamlServicePopulated()->dump(['a' => 'b'])
+        );
 
-        $this->getService()->setFilesystemService($fsMock);
-        $this->getService()->setYamlParser($yamlParserMock);
-
-        $this->assertEquals([], $this->getService()->parseFile('myfile.yaml'));
+        $this->assertEquals(
+            "a:\n    b: c\n",
+            $this->getYamlServicePopulated()->dump(['a' => ['b' => 'c']])
+        );
     }
 }
