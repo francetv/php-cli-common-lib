@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Ftven\Build\Common\Service\Box;
+namespace Ftven\Build\Common\Service\Json;
 
 use Ftven\Build\Common\Service\Base\AbstractServiceTestCase;
 
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class BoxServiceTest extends AbstractServiceTestCase
+class JsonServiceTest extends AbstractServiceTestCase
 {
 }

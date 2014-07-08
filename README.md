@@ -1,5 +1,7 @@
 # PHP COMMON LIB
 
+[![Build Status][]](https://travis-ci.org/ftven/php-common-lib)
+
 ## Usage
 
 Add the dependency in your composer.json :

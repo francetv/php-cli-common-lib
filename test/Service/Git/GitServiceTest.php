@@ -11,21 +11,23 @@
 
 namespace Ftven\Build\Common\Service\Git;
 
+use Ftven\Build\Common\Service\Base\AbstractServiceTestCase;
+
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class GitServiceTest extends \PHPUnit_Framework_TestCase
+class GitServiceTest extends AbstractServiceTestCase
 {
-    public function testConstruct()
+    /**
+     * @return GitService
+     */
+    protected function getService()
     {
-        $s = new GitService();
-
-        $this->assertEquals('Ftven\\Build\\Common\\Service\\Git\\GitService', get_class($s));
+        return parent::getService();
     }
+
     public function testGetUser()
     {
-        $s = new GitService();
-
         $systemMock = $this->getMock(
             'Ftven\\Build\\Common\\Service\\System\\SystemService', ['execute'], [], '', false
         );
@@ -35,8 +37,8 @@ class GitServiceTest extends \PHPUnit_Framework_TestCase
         $systemMock->expects($this->at(1))->method('execute')
             ->will($this->returnValue(["the name\n"]))->with('git config --global --get user.name');
 
-        $s->setSystemService($systemMock);
+        $this->getService()->setSystemService($systemMock);
 
-        $this->assertEquals(['name' => 'the name', 'email' => 'the@email'], $s->getUser());
+        $this->assertEquals(['name' => 'the name', 'email' => 'the@email'], $this->getService()->getUser());
     }
 }

@@ -11,36 +11,35 @@
 
 namespace Ftven\Build\Common\Service\System;
 
+use Ftven\Build\Common\Service\Base\AbstractServiceTestCase;
+
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class SystemServiceTest extends \PHPUnit_Framework_TestCase
+class SystemServiceTest extends AbstractServiceTestCase
 {
-    public function testConstruct()
+    /**
+     * @return SystemService
+     */
+    protected function getService()
     {
-        $s = new SystemService();
-
-        $this->assertEquals('Ftven\\Build\\Common\\Service\\System\\SystemService', get_class($s));
+        return parent::getService();
     }
     /**
      * @group integration-test
      */
     public function testExecuteForFailingCommandThrowException()
     {
-        $s = new SystemService();
-
         $this->setExpectedException('RuntimeException', 'Error when executing [exit 1]', 1);
 
-        $s->execute('exit 1');
+        $this->getService()->execute('exit 1');
     }
     /**
      * @group integration-test
      */
     public function testExecuteForFailingCommandWithExpectedExitCodesDoNotThrowException()
     {
-        $s = new SystemService();
-
-        list($output, $errorOutput, $return) = $s->execute('echo thetexthere ; exit 2', null, [0, 2]);
+        list($output, $errorOutput, $return) = $this->getService()->execute('echo thetexthere ; exit 2', null, [0, 2]);
 
         $this->assertEquals('thetexthere' . PHP_EOL, $output);
         $this->assertEquals('', $errorOutput);
