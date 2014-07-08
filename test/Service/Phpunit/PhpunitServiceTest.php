@@ -11,15 +11,11 @@
 
 namespace Ftven\Build\Common\Service\Phpunit;
 
+use Ftven\Build\Common\Service\Base\AbstractServiceTestCase;
+
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class PhpunitServiceTest extends \PHPUnit_Framework_TestCase
+class PhpunitServiceTest extends AbstractServiceTestCase
 {
-    public function testConstruct()
-    {
-        $s = new PhpunitService();
-
-        $this->assertEquals('Ftven\\Build\\Common\\Service\\Phpunit\\PhpunitService', get_class($s));
-    }
 }

@@ -11,28 +11,31 @@
 
 namespace Ftven\Build\Common\Service\Templating;
 
+use Ftven\Build\Common\Service\Base\AbstractServiceTestCase;
+
 /**
  * @author Olivier Hoareau <olivier@phppro.fr>
  */
-class TemplatingServiceTest extends \PHPUnit_Framework_TestCase
+class TemplatingServiceTest extends AbstractServiceTestCase
 {
-    public function testConstruct()
+    /**
+     * @return TemplatingService
+     */
+    protected function getService()
     {
-        $s = new TemplatingService();
-
-        $this->assertEquals('Ftven\\Build\\Common\\Service\\Templating\\TemplatingService', get_class($s));
+        return parent::getService();
     }
+
     /**
      * @group integ
      */
     public function testRender()
     {
-        $s = new TemplatingService();
         $loader = new \Twig_Loader_Filesystem();
-        $s->setTwig(new \Twig_Environment($loader));
+        $this->getService()->setTwig(new \Twig_Environment($loader));
 
-        $s->addRepository(__DIR__ . '/templates');
+        $this->getService()->addRepository(__DIR__ . '/templates');
 
-        $this->assertEquals('Hi john DOE !', $s->render('basic.twig', ['name' => 'John', 'lastname' => 'Doe']));
+        $this->assertEquals('Hi john DOE !', $this->getService()->render('basic.twig', ['name' => 'John', 'lastname' => 'Doe']));
     }
 }
