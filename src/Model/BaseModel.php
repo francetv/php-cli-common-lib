@@ -217,7 +217,7 @@ class BaseModel implements ModelInterface
      */
     protected function getTypeByProperty($type, $property, $value)
     {
-        foreach($this->{'get' . ucfirst($type)}() as $item) {
+        foreach($this[$type] as $item) {
             if (true === isset($item[$property]) && $value === $item[$property]) {
                 return $item;
             }
