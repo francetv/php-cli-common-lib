@@ -30,7 +30,14 @@ class HttpService implements HttpServiceInterface
      */
     public function request($url, $method = 'GET', $headers = [], $body = null, $options = [])
     {
-        $request = $this->getGuzzleClient()->createRequest($method, $url);
+        if (false === is_array($options)) {
+            $options = [];
+        }
+
+        $request = $this->getGuzzleClient()->createRequest($method, $url, $options);
+
+        $request->addHeaders($headers);
+        $request->setBody($body);
 
         $response = $this->getGuzzleClient()->send($request);
 

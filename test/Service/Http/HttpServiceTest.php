@@ -18,4 +18,46 @@ use Ftven\Build\Common\Service\Base\AbstractServiceTestCase;
  */
 class HttpServiceTest extends AbstractServiceTestCase
 {
+    /**
+     * @return HttpService
+     */
+    protected function getService()
+    {
+        return parent::getService();
+    }
+    /**
+     * @group unit
+     */
+    public function testRequestHeaders()
+    {
+        $guzzleClientMock = $this->getMock('GuzzleHttp\\Client', ['createRequest', 'send'], [], '', true);
+        $requestMock      = $this->getMock(
+            'GuzzleHttp\\Message\\RequestInterface',
+            [
+                'addHeaders', 'setBody', 'setUrl', 'getUrl', 'getResource',
+                'getQuery','setQuery', 'getMethod', 'setMethod','setScheme',
+                'getScheme', 'getPort', 'setPort', 'getHost', 'setHost',
+                'getPath', 'setPath', '__toString', 'getProtocolVersion',
+                'getConfig', 'getBody', 'getHeaders', 'getHeader',
+                'hasHeader', 'addHeader', 'setHeader', 'setHeaders',
+                'getEmitter', 'removeHeader'
+            ],
+            [],
+            '',
+            false
+        );
+        $responseMock = $this->getMock('GuzzleHttp\\Message\\ResponseInterface',
+            [],
+            [],
+            '',
+            false
+        );
+        $requestMock->expects($this->once())->method('addHeaders')->with(['A' => 'B', 'X-A value' => 'X-B value']);
+        $requestMock->expects($this->once())->method('setBody')->with(null);
+        $guzzleClientMock->expects($this->once())->method('send')->will($this->returnValue($responseMock));
+        $guzzleClientMock->expects($this->once())->method('createRequest')->will($this->returnValue($requestMock));
+        $this->getService()->setGuzzleClient($guzzleClientMock);
+
+        $this->getService()->request('GET', 'http://localhost/myuri', ['A' => 'B', 'X-A value' => 'X-B value']);
+    }
 }
