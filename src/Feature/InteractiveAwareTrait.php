@@ -43,7 +43,7 @@ trait InteractiveAwareTrait
         if (true === $hidden) {
             $question->setHidden($hidden);
         }
-        
+
         $question->setValidator(function ($answer) {
             $len = function_exists('mb_strlen') ? mb_strlen($answer) : strlen($answer);
 
