@@ -40,7 +40,7 @@ trait InteractiveAwareTrait
 
         $question = new Question($message . ($default ? (sprintf(' [%s]', $default)) : '') . ' : ', $default);
 
-        if (true === $hidden) {
+        if (true === (bool)$hidden) {
             $question->setHidden($hidden);
         }
 
