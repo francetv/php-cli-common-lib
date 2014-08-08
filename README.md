@@ -1,4 +1,6 @@
-# COMMON LIB
+# PHP COMMON LIB
+
+[![Build Status](https://travis-ci.org/francetv/php-common-lib.svg?branch=master)](https://travis-ci.org/francetv/php-common-lib)
 
 ## Usage
 
