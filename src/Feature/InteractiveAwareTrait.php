@@ -27,17 +27,22 @@ trait InteractiveAwareTrait
     use OutputAwareTrait;
     use InputAwareTrait;
     /**
-     * @param $message
-     * @param null $default
+     * @param string $message
+     * @param null   $default
+     * @param bool   $hidden
      *
      * @return string
      */
-    protected function prompt($message, $default = null)
+    protected function prompt($message, $default = null, $hidden = false)
     {
         /** @var QuestionHelper $q */
         $q = $this->getHelperSet()->get('question');
 
         $question = new Question($message . ($default ? (sprintf(' [%s]', $default)) : '') . ' : ', $default);
+
+        if (true === (bool)$hidden) {
+            $question->setHidden($hidden);
+        }
 
         $question->setValidator(function ($answer) {
             $len = function_exists('mb_strlen') ? mb_strlen($answer) : strlen($answer);

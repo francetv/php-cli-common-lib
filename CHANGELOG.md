@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+1.2.0
+-----
+
+ * hidden passwords
+
 1.1.0
 -----
 
@@ -12,5 +17,5 @@ CHANGELOG
 
 1.0.0
 -----
- * official GitHub release (from proprietary import)
 
+ * official GitHub release (from proprietary import)
